@@ -2,37 +2,42 @@ package interface_adapter.clear_users;
 
 // TODO Complete me
 import interface_adapter.ViewModel;
-import interface_adapter.signup.SignupState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class ClearViewModel extends ViewModel {
-    public static final String  TITLE_LABEL = "Clear view";
+    public static final String  TITLE_LABEL = "Message";
 
-    public static final String CLEAR_BUTTON = "Delete all";
 
     public static final String CANCEL_BUTTON_LABEL = "Cancel";
 
-    private static ClearState state = new ClearState();
+    public static  ClearState state = new ClearState();
 
-    public ClearViewModel(String viewName) {
-        super(viewName);
+    public ClearViewModel() {
+        super("sign up");
     }
 
     public void setState(ClearState state) {
-        state = state;
+        this.state = state;
     }
 
-    public static ClearState getstate() {return state;}
+    public static ClearState getstate() {
+        state.SetClicked();
+        return state;}
 
-    @Override
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     public void firePropertyChanged() {
-
+        support.firePropertyChange("state", null, state);
     }
+
 
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
+    }
 
+    public ClearState getState() {
+        return state;
     }
 }

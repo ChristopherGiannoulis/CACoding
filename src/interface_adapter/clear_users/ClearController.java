@@ -9,7 +9,7 @@ public class ClearController {
     public ClearController(ClearInputBoundary newp) {
         ClearController.userClearInteractor = newp;}
 
-    public static void execute(boolean state) {
+    public void execute(boolean state) {
         userClearInteractor.execute(state);
     }
 
